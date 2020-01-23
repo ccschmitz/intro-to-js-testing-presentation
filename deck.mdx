@@ -1,0 +1,178 @@
+import { Appear, Head, Image, Notes } from "mdx-deck";
+import { swiss, prism } from "mdx-deck/themes";
+
+import { custom } from "./theme";
+
+export const themes = [swiss, prism, custom];
+
+import basicJestTest from "./images/basic-jest-test.png";
+
+<Head>
+  <title>Intro to Testing with React Testing Library</title>
+
+  <meta name='twitter:card' content='summary_large_image' />
+  <meta name='twitter:site' content='@ccschmitz' />
+  <meta name='twitter:title' content='mdx-deck' />
+  <meta name='twitter:description' content='Intro to Testing with React Testing Library' />
+</Head>
+
+# Intro to Testing with React Testing Library
+
+By Chris Schmitz
+
+---
+
+# Agenda
+
+* What and why
+* Types of tests
+* Tools for writing tests
+* Examples
+
+---
+
+# What is a test?
+
+Code you write to verify the behavior of your application.
+
+---
+
+# Why write tests?
+
+<Notes>
+  <ol>
+    <li>Documentation</li>
+    <li>Consistency</li>
+    <li>Confidence</li>
+    <li>Productiity</li>
+  </ol>
+</Notes>
+
+---
+
+# Documentation
+
+Tests are a specifications for how our code should work.
+
+<Notes>
+  There is even something called Behavior Driven Development (BDD) which encourages non-engineers to write specifications for tests.
+</Notes>
+
+---
+
+# Consistency
+
+Verify that engineers are following best practices and conventions for your team.
+
+---
+
+# Comfort & Confidence
+
+A strong test suite is like a warm blanket.
+
+---
+
+# Productivity
+
+We write tests because it allows us to ship quality code faster.
+
+<Notes>
+  If you haven't integrated testing into your workflow, I'm sure it's hard to imagine that writing more code is going to increase the velocity of your team, but the benefits from exponentially as the complexity of your codebase and size of your team gorws.
+</Notes>
+
+---
+
+## Types of Tests
+
+* **End-to-End**: Spin up your app and simulate user behavior. Kind of like a robot performing a task in your app.
+* **Integration**: Verify that multiple units work together.
+* **Unit**: Verify the functionality of a single function/component.
+* **Static**: Catch typos and errors while writing code.
+
+---
+
+# React Component Tests
+
+---
+
+# A Basic Test
+
+```js
+const expected = true;
+const actual = false;
+
+if (actual !== expected) {
+  throw new Error(`${actual} is not ${expected}`);
+}
+```
+
+---
+
+## Unhelpful Output
+
+```bash
+node tests/basic.test.js
+/Users/chrisschmitz/code/presentation-react-testing/tests/basic.test.js:5
+throw new Error(`${actual} is not ${expected}`);
+^
+
+Error: true is not false
+  at Object.<anonymous> (/Users/chrisschmitz/code/presentation-react-testing/tests/basic.test.js:5:9)
+  at Module._compile (internal/modules/cjs/loader.js:776:30)
+  at Object.Module._extensions..js (internal/modules/cjs/loader.js:787:10)
+  at Module.load (internal/modules/cjs/loader.js:653:32)
+  at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+  at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+  at Function.Module.runMain (internal/modules/cjs/loader.js:829:12)
+  at startup (internal/bootstrap/node.js:283:19)
+  at bootstrapNodeJSCore (internal/bootstrap/node.js:622:3)
+```
+
+<Notes>
+  This provides some feedback, but it's not very useful. This we reach for testing tools like Jest.
+</Notes>
+
+---
+
+# A Jest Test
+
+```js
+const expected = true;
+const actual = false;
+
+test("it works", () => {
+  expect(actual).toBe(expected);
+});
+```
+
+---
+
+# Jest Output
+
+<Image src={basicJestTest} size="contain" />
+
+<Notes>
+  Note the detailed information about what failed, what was expected, and information all the tests in this run.
+
+  We use a tool like Jest to *run* our tests. These could be basic unit tests like we have here, but we need to test React components.
+</Notes>
+
+---
+
+# Questions?
+
+Otherwise, let's write some tests!
+
+---
+
+# More Things to Explore
+
+* Clearer assertions with [jest-dom](https://github.com/testing-library/jest-dom).
+* Accessibility testing with [jest-axe](https://github.com/nickcolley/jest-axe).
+* Testing hooks with [react-hooks-testing-library](https://react-hooks-testing-library.com/usage/basic-hooks).
+* More realistic event simulation with [user-event](https://github.com/testing-library/user-event).
+* The [code sandboxes from this talk](https://codesandbox.io/dashboard/sandboxes/Intro%20to%20Testing).
+
+---
+
+# Thanks!
